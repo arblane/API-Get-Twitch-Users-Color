@@ -1,1 +1,99 @@
-{"name":"API Get User Color","description":"Utility to retrieve the targeted Twitch User's color. Either use the hex color in the calling effect or store it for later use.","version":1.1,"author":"arblane","components":{"commands":[],"counters":[],"currencies":[],"effectQueues":[],"events":[],"eventGroups":[],"hotkeys":[],"presetEffectLists":[{"name":"[API] Get User Color","effects":{"list":[{"id":"043b10c0-266b-11ee-83e6-23362b1bd18f","type":"firebot:http-request","active":true,"headers":[],"options":{"useTwitchAuth":true},"url":"https://api.twitch.tv/helix/chat/color?user_id=$userId[$replace[$lowercase[$presetListArg[ThisUser]], \"@\", \"\"]]","method":"GET","effectLabel":"Get Users Color Info"},{"id":"1d460bb0-266b-11ee-83e6-23362b1bd18f","type":"firebot:customvariable","active":true,"ttl":30,"name":"userColorJson","variableData":"$effectOutput[httpResponse]","effectLabel":"userColorJson"},{"id":"4dab83b0-2671-11ee-99d8-cdc6d6f2dd08","type":"firebot:customvariable","active":true,"ttl":30,"name":"userColorData","variableData":"$customVariable[userColorJson,data]","effectLabel":"userColorData"},{"id":"cf28edb0-2671-11ee-99d8-cdc6d6f2dd08","type":"firebot:customvariable","active":true,"ttl":30,"name":"userColor","effectLabel":"userColor","variableData":"$customVariable[userColorData,0.color]"},{"id":"c3cecbb0-56f5-11ee-a5d5-2f1d6b6d5b1d","type":"firebot:filewriter","active":false,"writeMode":"append","deleteLineMode":"lines","replaceLineMode":"lineNumbers","filepath":"E:\\Streaming\\data\\twitchClip.json","text":"Color - $customVariable[userColorData,0]","effectLabel":"debug value"}],"id":"d4366eb0-266a-11ee-83e6-23362b1bd18f"},"args":[{"name":"ThisUser"}],"sortTags":["75e6a3bc-a3d9-47a9-9136-63a957f2b106","4ec259a1-f622-4d17-881c-b3031774dbc4"],"id":"d43647a0-266a-11ee-83e6-23362b1bd18f"}],"timers":[],"viewerRoles":[],"quickActions":[]},"requireCurrency":false,"importQuestions":[]}
+{
+  "name": "API Get User Color",
+  "description": "Utility to retrieve the targeted Twitch User's color. Either use the hex color in the calling effect or store it for later use.",
+  "version": 1.1,
+  "author": "arblane",
+  "components": {
+    "commands": [],
+    "counters": [],
+    "currencies": [],
+    "effectQueues": [],
+    "events": [],
+    "eventGroups": [],
+    "hotkeys": [],
+    "presetEffectLists": [
+      {
+        "name": "[API] Get User Color",
+        "effects": {
+          "list": [
+            {
+              "id": "ca4cbe40-6ac6-11ee-a034-77f1f8367a32",
+              "type": "firebot:customvariable",
+              "active": true,
+              "ttl": 30,
+              "variableData": "$replace[$lowercase[$presetListArg[ThisUser]], \"@\", \"\"]",
+              "name": "this_user",
+              "effectLabel": "this_user"
+            },
+            {
+              "id": "043b10c0-266b-11ee-83e6-23362b1bd18f",
+              "type": "firebot:http-request",
+              "active": true,
+              "headers": [],
+              "options": {
+                "useTwitchAuth": true
+              },
+              "url": "https://api.twitch.tv/helix/chat/color?user_id=$userId[$customVariable[this_user]]",
+              "method": "GET",
+              "effectLabel": "Get Users Color Info"
+            },
+            {
+              "id": "1d460bb0-266b-11ee-83e6-23362b1bd18f",
+              "type": "firebot:customvariable",
+              "active": true,
+              "ttl": 30,
+              "name": "userColorJson",
+              "variableData": "$effectOutput[httpResponse]",
+              "effectLabel": "userColorJson"
+            },
+            {
+              "id": "4dab83b0-2671-11ee-99d8-cdc6d6f2dd08",
+              "type": "firebot:customvariable",
+              "active": true,
+              "ttl": 30,
+              "name": "userColorData",
+              "variableData": "$customVariable[userColorJson,data]",
+              "effectLabel": "userColorData"
+            },
+            {
+              "id": "cf28edb0-2671-11ee-99d8-cdc6d6f2dd08",
+              "type": "firebot:customvariable",
+              "active": true,
+              "ttl": 30,
+              "name": "userColor",
+              "effectLabel": "userColor",
+              "variableData": "$customVariable[userColorData,0.color]"
+            },
+            {
+              "id": "c3cecbb0-56f5-11ee-a5d5-2f1d6b6d5b1d",
+              "type": "firebot:filewriter",
+              "active": false,
+              "writeMode": "append",
+              "deleteLineMode": "lines",
+              "replaceLineMode": "lineNumbers",
+              "filepath": "E:\\Streaming\\data\\twitchClip.json",
+              "text": "Color - $customVariable[userColorData,0]",
+              "effectLabel": "debug value"
+            }
+          ],
+          "id": "d4366eb0-266a-11ee-83e6-23362b1bd18f"
+        },
+        "args": [
+          {
+            "name": "ThisUser"
+          }
+        ],
+        "sortTags": [
+          "75e6a3bc-a3d9-47a9-9136-63a957f2b106",
+          "4ec259a1-f622-4d17-881c-b3031774dbc4"
+        ],
+        "id": "d43647a0-266a-11ee-83e6-23362b1bd18f"
+      }
+    ],
+    "timers": [],
+    "viewerRoles": [],
+    "quickActions": []
+  },
+  "requireCurrency": false,
+  "importQuestions": []
+}
