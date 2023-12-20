@@ -2,7 +2,7 @@
 Utility to retrieve the targeted Twitch User's color
 
 # Compatibility
-- Firebot 5.59.2+
+- Firebot 5.58.0+
 
 # Install
 + Download
