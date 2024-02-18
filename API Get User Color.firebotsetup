@@ -1,7 +1,7 @@
 {
   "name": "API Get User Color",
   "description": "Utility to retrieve the targeted Twitch User's color. Either use the hex color in the calling effect or store it for later use.",
-  "version": 1.1,
+  "version": 1.2,
   "author": "arblane",
   "components": {
     "commands": [],
@@ -21,7 +21,7 @@
               "type": "firebot:customvariable",
               "active": true,
               "ttl": 30,
-              "variableData": "$replace[$lowercase[$presetListArg[ThisUser]], \"@\", \"\"]",
+              "variableData": "$replace[$lowercase[$#ThisUser], \"@\", \"\"]",
               "name": "this_user",
               "effectLabel": "this_user"
             },
@@ -33,7 +33,7 @@
               "options": {
                 "useTwitchAuth": true
               },
-              "url": "https://api.twitch.tv/helix/chat/color?user_id=$userId[$customVariable[this_user]]",
+              "url": "https://api.twitch.tv/helix/chat/color?user_id=$userId[$$this_user]",
               "method": "GET",
               "effectLabel": "Get Users Color Info"
             },
@@ -43,7 +43,7 @@
               "active": true,
               "ttl": 30,
               "name": "userColorJson",
-              "variableData": "$effectOutput[httpResponse]",
+              "variableData": "$&httpResponse",
               "effectLabel": "userColorJson"
             },
             {
